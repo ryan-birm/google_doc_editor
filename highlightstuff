@@ -1,0 +1,32 @@
+ function highlightstuff() {
+  var body = DocumentApp.getActiveDocument().getBody();
+  var paragraphs = body.getParagraphs();
+  for (let paragraph of paragraphs){
+    var text = paragraph.editAsText();
+    var check = text.getText();
+    if (text.findText("Example") != null){
+      text.setBackgroundColor(0, 6, '#c9daf8').setFontSize(10); // Change the highlight color here
+    }
+    var pattern = ":\\*";
+    var pattern2 = ":";
+    if (text.findText(pattern) != null){
+      var colon = text.findText(pattern2).getStartOffset() + 1;
+      text.editAsText().setText(text.getText().replace(" :*", " :"));
+      text = text.setBackgroundColor(0, colon, '#ffe599').setFontSize(10); 
+    }
+    if (text.findText("mklp") != null){
+      text.editAsText().setText(text.getText().replace("mklp", ""));
+      text = text.setBackgroundColor('#fee5f0').setFontSize(10);
+    }
+
+    if (text.findText("mktan") != null){
+      var last = text.findText(" mktan").getStartOffset() - 9;
+      var first = text.findText("starttan ").getStartOffset();
+      text.editAsText()
+      .setText(text.getText().replace("mktan", ""))
+      .setText(text.getText().replace("starttan ", ""));
+      check = text.getText();
+      text.setBackgroundColor(first, last, '#ffd4b8').setFontSize(10)
+    }
+  }
+}
