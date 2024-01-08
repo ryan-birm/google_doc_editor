@@ -28,5 +28,9 @@
       check = text.getText();
       text.setBackgroundColor(first, last, '#ffd4b8').setFontSize(10)
     }
+    var date_pattern = "[0-9]{1,2}\/[0-9]{1,2}"; 
+    if (text.findText(date_pattern) != null){
+      text.setFontSize(15);
+    }
   }
 }
